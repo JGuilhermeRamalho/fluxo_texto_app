@@ -20,8 +20,8 @@ class ThemeColorsApp {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [
-      Color(0xFF2C5F6F),
       Color(0xFF1A3D47),
+      Color(0xFF2C5F6F),
     ],
   );
 
