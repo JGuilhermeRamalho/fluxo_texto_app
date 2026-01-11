@@ -44,15 +44,19 @@ abstract class _HomeScreenControllerBase with Store {
     if (controladorTexto.text.trim().isEmpty) return false;
 
     if (estaEditando) {
+      // Atualizar nota existente e incrementar contador de edições
       notas[indiceEdicao!] = notas[indiceEdicao!].copiarCom(
         conteudo: controladorTexto.text.trim(),
         atualizadoEm: DateTime.now(),
+        quantidadeEdicoes: notas[indiceEdicao!].quantidadeEdicoes + 1,
       );
     } else {
+      // Adicionar nova nota
       final novaNota = ItemNota(
         titulo: tituloAtual,
         conteudo: controladorTexto.text.trim(),
         criadoEm: DateTime.now(),
+        quantidadeEdicoes: 0,
       );
       notas.add(novaNota);
     }

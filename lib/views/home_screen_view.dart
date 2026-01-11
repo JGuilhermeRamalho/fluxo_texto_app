@@ -26,12 +26,15 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false, // Não redimensiona com o teclado
+      resizeToAvoidBottomInset: false,
       body: estruturaTela(),
     );
   }
 
   Widget estruturaTela() {
+    final alturaTela = MediaQuery.of(context).size.height;
+    final larguraTela = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Container(
         decoration: const BoxDecoration(
@@ -39,23 +42,21 @@ class _HomeScreenViewState extends State<HomeScreenView> {
         ),
         child: Column(
           children: [
-            // Conteúdo principal (expansível)
             Expanded(
               child: Observer(
                 builder: (_) => _controlador.temNotas
-                    ? listaInformacoes()
-                    : telaVazia(),
+                    ? listaInformacoes(alturaTela, larguraTela)
+                    : telaVazia(alturaTela, larguraTela),
               ),
             ),
-
-            rodape(),
+            rodape(alturaTela, larguraTela),
           ],
         ),
       ),
     );
   }
 
-  Widget telaVazia() {
+  Widget telaVazia(double alturaTela, double larguraTela) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -64,25 +65,28 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             'Nenhuma informação salva',
             style: TextStyle(
               color: Colors.white.withOpacity(0.9),
-              fontSize: 18,
+              fontSize: alturaTela * 0.022,
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: alturaTela * 0.03),
           ElevatedButton(
             onPressed: abrirDialogTeclado,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               foregroundColor: Colors.black87,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              padding: EdgeInsets.symmetric(
+                horizontal: larguraTela * 0.08,
+                vertical: alturaTela * 0.02,
+              ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text(
+            child: Text(
               'Digite seu texto',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: alturaTela * 0.02,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -92,37 +96,36 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     );
   }
 
-  Widget listaInformacoes() {
+  Widget listaInformacoes(double alturaTela, double larguraTela) {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(larguraTela * 0.04),
           child: ElevatedButton(
             onPressed: abrirDialogTeclado,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               foregroundColor: Colors.black87,
-              minimumSize: const Size(double.infinity, 50),
+              minimumSize: Size(double.infinity, alturaTela * 0.06),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text(
+            child: Text(
               'Digite seu texto',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: alturaTela * 0.02,
                 fontWeight: FontWeight.w500,
               ),
             ),
           ),
         ),
-
         Expanded(
           child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: larguraTela * 0.04),
             itemCount: _controlador.notas.length,
             itemBuilder: (context, indice) {
-              return construirCardInformacao(indice);
+              return construirCardInformacao(indice, alturaTela, larguraTela);
             },
           ),
         ),
@@ -130,42 +133,48 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     );
   }
 
-  Widget construirCardInformacao(int indice) {
+  Widget construirCardInformacao(int indice, double alturaTela, double larguraTela) {
     final nota = _controlador.notas[indice];
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: EdgeInsets.only(bottom: alturaTela * 0.015),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(larguraTela * 0.04),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  nota.titulo,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
+                Expanded(
+                  child: Text(
+                    nota.titulo,
+                    style: TextStyle(
+                      fontSize: alturaTela * 0.02,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.edit, size: 20),
+                      icon: Icon(Icons.edit, size: alturaTela * 0.025),
                       onPressed: () => editarInformacao(indice),
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: larguraTela * 0.02),
                     IconButton(
-                      icon: const Icon(Icons.close, color: Colors.red, size: 20),
+                      icon: Icon(
+                        Icons.close,
+                        color: Colors.red,
+                        size: alturaTela * 0.025,
+                      ),
                       onPressed: () => mostrarDialogoExcluir(indice),
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
@@ -174,7 +183,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: alturaTela * 0.015),
             Center(
               child: TextButton(
                 onPressed: () => verDetalhes(nota),
@@ -183,10 +192,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                child: const Text(
+                child: Text(
                   'Ver detalhes',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: alturaTela * 0.02,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -198,9 +207,9 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     );
   }
 
-  Widget rodape() {
+  Widget rodape(double alturaTela, double larguraTela) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: alturaTela * 0.02),
       child: TextButton(
         onPressed: () {
           showDialog(
@@ -208,11 +217,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
             builder: (context) => const PoliticaPrivacidadeDialog(),
           );
         },
-        child: const Text(
+        child: Text(
           'Política de Privacidade',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 14,
+            fontSize: alturaTela * 0.017,
           ),
         ),
       ),
@@ -238,53 +247,57 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   }
 
   Widget construirDialogDigitacao() {
+    final alturaTela = MediaQuery.of(context).size.height;
+    final larguraTela = MediaQuery.of(context).size.width;
+
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
-        height: 400,
-        padding: const EdgeInsets.all(16),
+        height: alturaTela * 0.5,
+        width: larguraTela * 0.9,
+        padding: EdgeInsets.all(larguraTela * 0.04),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Observer(
-                  builder: (_) => Text(
-                    _controlador.tituloAtual,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                Expanded(
+                  child: Observer(
+                    builder: (_) => Text(
+                      _controlador.tituloAtual,
+                      style: TextStyle(
+                        fontSize: alturaTela * 0.022,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.close, size: 20),
-                      onPressed: () => Navigator.pop(context),
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                    ),
-                  ],
+                IconButton(
+                  icon: Icon(Icons.close, size: alturaTela * 0.025),
+                  onPressed: () => Navigator.pop(context),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: alturaTela * 0.02),
             Expanded(
               child: TextField(
                 controller: _controlador.controladorTexto,
                 maxLines: null,
                 expands: true,
                 textAlignVertical: TextAlignVertical.top,
+                style: TextStyle(fontSize: alturaTela * 0.02),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Digite seu texto aqui...',
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: alturaTela * 0.02),
             Observer(
               builder: (_) => ElevatedButton(
                 onPressed: () {
@@ -292,22 +305,25 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                     Navigator.pop(context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Por favor, digite algo antes de salvar'),
+                      SnackBar(
+                        content: Text(
+                          'Por favor, digite algo antes de salvar',
+                          style: TextStyle(fontSize: alturaTela * 0.018),
+                        ),
                       ),
                     );
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
+                  minimumSize: Size(double.infinity, alturaTela * 0.06),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 child: Text(
                   _controlador.estaEditando ? 'Atualizar' : 'Salvar',
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: alturaTela * 0.02,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -329,24 +345,38 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   }
 
   void mostrarDialogoExcluir(int indice) {
+    final alturaTela = MediaQuery.of(context).size.height;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Excluir informação'),
-        content: const Text('Deseja realmente excluir esta informação?'),
+        title: Text(
+          'Excluir informação',
+          style: TextStyle(fontSize: alturaTela * 0.022),
+        ),
+        content: Text(
+          'Deseja realmente excluir esta informação?',
+          style: TextStyle(fontSize: alturaTela * 0.02),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Text(
+              'Cancelar',
+              style: TextStyle(fontSize: alturaTela * 0.018),
+            ),
           ),
           TextButton(
             onPressed: () {
               _controlador.excluirNota(indice);
               Navigator.pop(context);
             },
-            child: const Text(
+            child: Text(
               'Excluir',
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: alturaTela * 0.018,
+              ),
             ),
           ),
         ],
