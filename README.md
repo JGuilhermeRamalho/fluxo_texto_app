@@ -1,16 +1,92 @@
-# fluxo_texto_app
+📱 Fluxo Texto App
 
-A new Flutter project.
+Aplicativo desenvolvido em Flutter com o objetivo de permitir que o usuário digite, edite e gerencie textos, além de visualizar métricas detalhadas sobre o conteúdo digitado, como quantidade de linhas, caracteres, edições e análise gráfica de letras e números.
 
-## Getting Started
+O projeto utiliza MobX para gerenciamento de estado e segue uma organização clara entre views, controllers, models e widgets.
 
-This project is a starting point for a Flutter application.
+🧩 Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+🔐 Tela de Login
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Autenticação com usuário e senha
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Validação de campos
+
+Controle de loading
+
+Exibição da Política de Privacidade
+
+🏠 Tela Inicial (Home)
+
+Listagem de textos salvos
+
+Estado vazio quando não há informações
+
+Criação de novos textos
+
+Edição de textos existentes
+
+Exclusão de textos com confirmação
+
+📝 Edição de Texto
+
+Diálogo modal para digitação
+
+Controle de criação e edição
+
+Validação de conteúdo antes de salvar
+
+📊 Detalhes do Texto
+
+Quantidade de linhas
+
+Quantidade de edições
+
+Total de caracteres
+
+Gráfico de barras com:
+
+Porcentagem de letras
+
+Porcentagem de números
+
+📜 Política de Privacidade
+
+Acessível em todas as telas principais
+
+Exibida via diálogo modal
+
+🏗️ Estrutura do Projeto
+lib/
+├── core/
+│   └── theme_colors_app.dart
+│
+├── controllers/
+│   ├── login_controller/
+│   │   └── login_controller.dart
+│   └── home_controller/
+│       └── home_screen_controller.dart
+│
+├── models/
+│   └── item_nota.dart
+│
+├── views/
+│   ├── login_page_view.dart
+│   ├── home_screen_view.dart
+│   └── flow_details_view.dart
+│
+├── widgets/
+│   ├── politica_privacidade_dialog.dart
+│   └── barra_grafico.dart
+│
+└── main.dart
+
+🛠️ Tecnologias Utilizadas
+
+Flutter
+
+Dart
+
+MobX
+
+Material Design
