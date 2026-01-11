@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluxo_texto_app/core/theme_colors_app.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:fluxo_texto_app/widgets/politica_privacidade_dialog.dart';
 import '../controllers/login_controller/login_controller.dart';
 
 class LoginPageView extends StatefulWidget {
@@ -63,7 +64,7 @@ class _LoginPageViewState extends State<LoginPageView> {
                         Column(
                           children: [
                             TextButton(
-                              onPressed: () => _mostrarPoliticaPrivacidade(context),
+                              onPressed: () => mostrarPoliticaPrivacidade(context),
                               child: Text(
                                 'Política de Privacidade',
                                 style: TextStyle(
@@ -285,160 +286,17 @@ class _LoginPageViewState extends State<LoginPageView> {
     );
   }
 
-  void _mostrarPoliticaPrivacidade(BuildContext context) {
-    final alturaTelaDialog = MediaQuery.of(context).size.height;
-    final larguraTelaDialog = MediaQuery.of(context).size.width;
+  void mostrarPoliticaPrivacidade(BuildContext context) {
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(larguraTelaDialog * 0.04),
-          ),
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: larguraTelaDialog * 0.9,
-              maxHeight: alturaTelaDialog * 0.8,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(larguraTelaDialog * 0.06),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(larguraTelaDialog * 0.04),
-                      topRight: Radius.circular(larguraTelaDialog * 0.04),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.privacy_tip_outlined,
-                        color: Colors.grey[700],
-                        size: larguraTelaDialog * 0.07,
-                      ),
-                      SizedBox(width: larguraTelaDialog * 0.03),
-                      Expanded(
-                        child: Text(
-                          'Política de Privacidade',
-                          style: TextStyle(
-                            fontSize: larguraTelaDialog * 0.05,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () => Navigator.of(context).pop(),
-                        color: Colors.grey[600],
-                        iconSize: larguraTelaDialog * 0.06,
-                      ),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.all(larguraTelaDialog * 0.06),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildSecaoPolitica(
-                          context,
-                          'Última atualização',
-                          'Janeiro de 2026',
-                        ),
-                        SizedBox(height: alturaTelaDialog * 0.025),
-
-                        _buildSecaoPolitica(
-                          context,
-                          '1. Coleta de Dados',
-                          'Coletamos informações que você nos fornece diretamente, como nome, e-mail e outras informações de contato quando você cria uma conta ou usa nossos serviços.',
-                        ),
-                        SizedBox(height: alturaTelaDialog * 0.02),
-
-                        _buildSecaoPolitica(
-                          context,
-                          '2. Uso dos Dados',
-                          'Utilizamos suas informações para fornecer, manter e melhorar nossos serviços, processar transações, enviar comunicações e personalizar sua experiência.',
-                        ),
-                        SizedBox(height: alturaTelaDialog * 0.02),
-
-                        _buildSecaoPolitica(
-                          context,
-                          '3. Compartilhamento de Dados',
-                          'Não vendemos suas informações pessoais. Podemos compartilhar seus dados apenas com prestadores de serviços confiáveis que nos ajudam a operar nosso negócio.',
-                        ),
-                        SizedBox(height: alturaTelaDialog * 0.02),
-
-                        _buildSecaoPolitica(
-                          context,
-                          '4. Segurança',
-                          'Implementamos medidas de segurança técnicas e organizacionais apropriadas para proteger suas informações pessoais contra acesso não autorizado, alteração, divulgação ou destruição.',
-                        ),
-                        SizedBox(height: alturaTelaDialog * 0.02),
-
-                        _buildSecaoPolitica(
-                          context,
-                          '5. Seus Direitos',
-                          'Você tem o direito de acessar, corrigir, excluir ou exportar seus dados pessoais. Entre em contato conosco para exercer esses direitos.',
-                        ),
-                        SizedBox(height: alturaTelaDialog * 0.02),
-
-                        _buildSecaoPolitica(
-                          context,
-                          '6. Contato',
-                          'Se você tiver dúvidas sobre esta Política de Privacidade, entre em contato através do e-mail: privacidade@exemplo.com',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(larguraTelaDialog * 0.06),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[50],
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(larguraTelaDialog * 0.04),
-                      bottomRight: Radius.circular(larguraTelaDialog * 0.04),
-                    ),
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(vertical: alturaTelaDialog * 0.018),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(larguraTelaDialog * 0.02),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: Text(
-                        'Entendi',
-                        style: TextStyle(
-                          fontSize: larguraTelaDialog * 0.04,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+       return PoliticaPrivacidadeDialog();
       },
     );
   }
 
-  Widget _buildSecaoPolitica(BuildContext context, String titulo, String conteudo) {
+  Widget buildSecaoPolitica(BuildContext context, String titulo, String conteudo) {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Column(
