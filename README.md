@@ -4,6 +4,7 @@ Aplicativo desenvolvido em Flutter com o objetivo de permitir que o usuário dig
 
 O projeto utiliza MobX para gerenciamento de estado e segue uma organização clara entre views, controllers, models e widgets.
 
+
 🧩 Funcionalidades
 
 🔐 Tela de Login
@@ -15,6 +16,7 @@ Validação de campos
 Controle de loading
 
 Exibição da Política de Privacidade
+
 
 🏠 Tela Inicial (Home)
 
@@ -28,6 +30,7 @@ Edição de textos existentes
 
 Exclusão de textos com confirmação
 
+
 📝 Edição de Texto
 
 Diálogo modal para digitação
@@ -35,6 +38,7 @@ Diálogo modal para digitação
 Controle de criação e edição
 
 Validação de conteúdo antes de salvar
+
 
 📊 Detalhes do Texto
 
@@ -50,36 +54,13 @@ Porcentagem de letras
 
 Porcentagem de números
 
+
 📜 Política de Privacidade
 
 Acessível em todas as telas principais
 
 Exibida via diálogo modal
 
-🏗️ Estrutura do Projeto
-lib/
-├── core/
-│   └── theme_colors_app.dart
-│
-├── controllers/
-│   ├── login_controller/
-│   │   └── login_controller.dart
-│   └── home_controller/
-│       └── home_screen_controller.dart
-│
-├── models/
-│   └── item_nota.dart
-│
-├── views/
-│   ├── login_page_view.dart
-│   ├── home_screen_view.dart
-│   └── flow_details_view.dart
-│
-├── widgets/
-│   ├── politica_privacidade_dialog.dart
-│   └── barra_grafico.dart
-│
-└── main.dart
 
 🛠️ Tecnologias Utilizadas
 
