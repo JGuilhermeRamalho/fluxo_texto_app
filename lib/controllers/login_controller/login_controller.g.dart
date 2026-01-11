@@ -125,16 +125,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  late final _$entrarAsyncAction = AsyncAction(
-    '_LoginControllerBase.entrar',
-    context: context,
-  );
-
-  @override
-  Future<void> entrar() {
-    return _$entrarAsyncAction.run(() => super.entrar());
-  }
-
   late final _$_LoginControllerBaseActionController = ActionController(
     name: '_LoginControllerBase',
     context: context,

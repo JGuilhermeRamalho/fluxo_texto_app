@@ -4,10 +4,6 @@ class ThemeColorsApp {
 
   ThemeColorsApp._();
 
-  // CORES PRIMÁRIAS DO APP
-
-  static const Color primary = Color(0xFF2C5F6F);
-
   // CORES DOS GRÁFICOS
 
   static const Color vermelhoGrafico = Color(0xFF8B1A1A);

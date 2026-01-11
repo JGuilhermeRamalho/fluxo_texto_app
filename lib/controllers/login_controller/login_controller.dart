@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../views/home_screen_view.dart';
+
 part 'login_controller.g.dart';
 
 class LoginController = _LoginControllerBase with _$LoginController;
@@ -78,8 +80,8 @@ abstract class _LoginControllerBase with Store {
     return formKey.currentState?.validate() ?? false;
   }
 
-  @action
-  Future<void> entrar() async {
+
+  Future<void> entrar(BuildContext context) async {
     if (validarFormulario()) {
       setLoading(true);
 
@@ -89,6 +91,13 @@ abstract class _LoginControllerBase with Store {
       print('Senha: ${senhaController.text}');
 
       setLoading(false);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeScreenView(),
+        ),
+      );
     }
   }
 

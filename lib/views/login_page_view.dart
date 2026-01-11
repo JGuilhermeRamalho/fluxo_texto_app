@@ -254,7 +254,7 @@ class _LoginPageViewState extends State<LoginPageView> {
         width: double.infinity,
         height: alturaTela * 0.065,
         child: ElevatedButton(
-          onPressed: _controller.isLoading ? null : _controller.entrar,
+          onPressed: () => _controller.isLoading ? null : _controller.entrar(context),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.white.withOpacity(0.2),
             foregroundColor: Colors.white,
