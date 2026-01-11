@@ -31,13 +31,17 @@ class ItemNota {
   }
 
   double get porcentagemLetras {
-    if (totalCaracteres == 0) return 0;
-    return (quantidadeLetras / totalCaracteres) * 100;
+    final totalLetrasNumeros = quantidadeLetras + quantidadeNumeros;
+    if (totalLetrasNumeros == 0) return 0;
+    final resultado = (quantidadeLetras / totalLetrasNumeros) * 100;
+    return resultado;
   }
 
   double get porcentagemNumeros {
-    if (totalCaracteres == 0) return 0;
-    return (quantidadeNumeros / totalCaracteres) * 100;
+    final totalLetrasNumeros = quantidadeLetras + quantidadeNumeros;
+    if (totalLetrasNumeros == 0) return 0;
+    final resultado = (quantidadeNumeros / totalLetrasNumeros) * 100;
+    return resultado;
   }
 
   ItemNota copiarCom({

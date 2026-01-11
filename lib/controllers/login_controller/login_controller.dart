@@ -87,9 +87,6 @@ abstract class _LoginControllerBase with Store {
 
       await Future.delayed(const Duration(seconds: 2));
 
-      print('Usuário: ${usuarioController.text}');
-      print('Senha: ${senhaController.text}');
-
       setLoading(false);
 
       Navigator.pushReplacement(
