@@ -1,14 +1,12 @@
-📱 Fluxo Texto App
-
+# 📱 Fluxo Texto App / [⬇️ Baixar APK](apk/fluxo_texto_app.apk)
 
 Aplicativo desenvolvido em Flutter com o objetivo de permitir que o usuário digite, edite e gerencie textos, além de visualizar métricas detalhadas sobre o conteúdo digitado, como quantidade de linhas, caracteres, edições e análise gráfica de letras e números.
 
 O projeto utiliza MobX para gerenciamento de estado e segue uma organização clara entre views, controllers, models e widgets.
 
+# 🧩 Funcionalidades
 
-🧩 Funcionalidades
-
-🔐 Tela de Login
+## 🔐 Tela de Login
 
 Autenticação com usuário e senha
 
@@ -19,7 +17,7 @@ Controle de loading
 Exibição da Política de Privacidade
 
 
-🏠 Tela Inicial (Home)
+## 🏠 Tela Inicial (Home)
 
 Listagem de textos salvos
 
@@ -32,7 +30,7 @@ Edição de textos existentes
 Exclusão de textos com confirmação
 
 
-📝 Edição de Texto
+## 📝 Edição de Texto
 
 Diálogo modal para digitação
 
@@ -41,7 +39,7 @@ Controle de criação e edição
 Validação de conteúdo antes de salvar
 
 
-📊 Detalhes do Texto
+## 📊 Detalhes do Texto
 
 Quantidade de linhas
 
@@ -56,14 +54,14 @@ Porcentagem de letras
 Porcentagem de números
 
 
-📜 Política de Privacidade
+## 📜 Política de Privacidade
 
 Acessível em todas as telas principais
 
 Exibida via diálogo modal
 
 
-🛠️ Tecnologias Utilizadas
+# 🛠️ Tecnologias Utilizadas
 
 Flutter
 
