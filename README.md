@@ -1,5 +1,6 @@
 📱 Fluxo Texto App
 
+
 Aplicativo desenvolvido em Flutter com o objetivo de permitir que o usuário digite, edite e gerencie textos, além de visualizar métricas detalhadas sobre o conteúdo digitado, como quantidade de linhas, caracteres, edições e análise gráfica de letras e números.
 
 O projeto utiliza MobX para gerenciamento de estado e segue uma organização clara entre views, controllers, models e widgets.
